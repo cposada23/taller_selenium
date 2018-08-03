@@ -29,7 +29,7 @@ public class DownloadFile {
         WebElement buttonCreate = driver.findElement(By.id("create"));
         buttonCreate.click();
 
-        /*Fluentwait to wait for the link*/
+        /*FluentWait to wait for the link*/
         /*FluentWait<WebDriver> wait = new FluentWait<>(driver);
         wait.pollingEvery(Duration.ofMillis(2000));
         wait.withTimeout(Duration.ofSeconds(10));

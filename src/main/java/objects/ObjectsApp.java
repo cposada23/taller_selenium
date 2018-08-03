@@ -4,7 +4,9 @@ import jdk.nashorn.internal.runtime.regexp.joni.constants.OPCode;
 import objects.low.AlertBox;
 import objects.low.CheckBox;
 import objects.low.DropDown;
+import objects.medium.AjaxRequest;
 import objects.medium.DownloadFile;
+import objects.medium.JqueryListBox;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import utilities.InputReader;
@@ -22,8 +24,9 @@ public class ObjectsApp {
         logger.info("*                                                       *");
         logger.info("*********************************************************");
 //        CheckBox.checkBoxAutomation(browser);
-        //AlertBox.alertBoxAutomation(browser);
-        DownloadFile.downloadFileAutomation(browser);
+        AlertBox.alertBoxAutomation(browser);
+        // DownloadFile.downloadFileAutomation(browser);
+        // JqueryListBox.jquerylistBoxAutomation(browser);
         /*String option;
         do {
             showMenu();
@@ -110,6 +113,8 @@ public class ObjectsApp {
             logger.info("*                     MEDIUM MENU                       *");
             logger.info("*********************************************************");
             logger.info("* 1) Download File                                      *");
+            logger.info("* 2) Ajax Request                                       *");
+            logger.info("* 3) JqueryListBox                                      *");
             logger.info("* Q) EXIT                                               *");
             logger.info("*********************************************************");
 
@@ -119,8 +124,10 @@ public class ObjectsApp {
                     DownloadFile.downloadFileAutomation(browser);
                     break;
                 case "2":
+                    AjaxRequest.ajaxAutomation(browser);
                     break;
                 case "3":
+                    JqueryListBox.jquerylistBoxAutomation(browser);
                     break;
                 case EXIT:
                     break;
