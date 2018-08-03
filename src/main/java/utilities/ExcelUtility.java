@@ -78,22 +78,25 @@ public class ExcelUtility {
 
     }
 
-    public static String getDataFromCell(String sheet, int RowNum, int ColNum) throws Exception{
+    public static Object getDataFromCell(String sheet, int RowNum, int ColNum) throws Exception{
         XSSFSheet ExcelWSheet = ExcelWBook.getSheet(sheet);
+        Object cellData = "";
         try{
 
             XSSFCell Cell = ExcelWSheet.getRow(RowNum).getCell(ColNum);
 
-            String CellData = Cell.getStringCellValue();
-            Cell.setCellType(CellType.STRING);
-
-
-
-            return CellData;
+            if(Cell.getCellTypeEnum() == CellType.STRING) {
+                cellData = Cell.getStringCellValue();
+            }else if(Cell.getCellTypeEnum() == CellType.NUMERIC) {
+                cellData = Cell.getNumericCellValue();
+            }
+            /*String CellData = Cell.getStringCellValue();
+            Cell.setCellType(CellType.STRING);*/
+            return cellData;
 
         }catch (Exception e){
 
-            return"";
+            return "";
 
         }
 

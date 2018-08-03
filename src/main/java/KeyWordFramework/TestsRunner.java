@@ -49,20 +49,20 @@ public class TestsRunner {
         int numberOfSteps = ExcelUtility.getNumberOfSteps(testCaseSheet);
         logger.info("The test case has " + numberOfSteps + " number of steps");
         for (int i = 1; i <= numberOfSteps; i++) {
-            String method = ExcelUtility.getDataFromCell(testCaseSheet, i, Constants.actionKeyWordColumn);
+            String method = ExcelUtility.getDataFromCell(testCaseSheet, i, Constants.actionKeyWordColumn).toString();
             List<Object> myParamList = new ArrayList<>();
             logger.debug("Calling Method: " + method);
             for (int col = Constants.locatorTypeColumn; col < Constants.resultCaseColumn; col++) {
-                String dataFromCol = ExcelUtility.getDataFromCell(testCaseSheet, i, col);
-
-                if (!dataFromCol.isEmpty() & !dataFromCol.equals("null")) {
-                    logger.debug("added parameter: " + dataFromCol);
-                    myParamList.add(dataFromCol);
+                // String dataFromCol = ExcelUtility.getDataFromCell(testCaseSheet, i, col);
+                Object data = ExcelUtility.getDataFromCell(testCaseSheet, i, col);
+                if ( !data.toString().isEmpty() & !data.toString().equals("null")) {
+                    logger.debug("added parameter: " + data.toString());
+                    myParamList.add(data);
                 }
 
             }
             Object[] paramListObject;
-            paramListObject = new String[myParamList.size()];
+            paramListObject = new Object[myParamList.size()];
             paramListObject = myParamList.toArray(paramListObject);
             runReflectionMethod("KeyWordFramework.configuration.KeyWords",
                     method, paramListObject);
@@ -86,7 +86,9 @@ public class TestsRunner {
             if (inputArgs[i] instanceof String) {
                 params[i] = String.class;
             }else if (inputArgs[i] instanceof Integer) {
-                params[i] = String.class;
+                params[i] = Integer.class;
+            }else if (inputArgs[i] instanceof Double) {
+                params[i] = Double.class;
             }
         }
 

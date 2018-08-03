@@ -86,6 +86,10 @@ public class KeyWords {
         sleep(d);
     }
 
+    public void waitFor(Double duration){
+        sleep(duration.intValue());
+    }
+
 
     public void sleep(int millis) {
         try {
