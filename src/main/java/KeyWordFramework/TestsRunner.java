@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import utilities.ExcelUtility;
+import utilities.ReflectionRunner;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -64,60 +65,12 @@ public class TestsRunner {
             Object[] paramListObject;
             paramListObject = new Object[myParamList.size()];
             paramListObject = myParamList.toArray(paramListObject);
-            runReflectionMethod("KeyWordFramework.configuration.KeyWords",
+            ReflectionRunner.runReflectionMethod("KeyWordFramework.configuration.KeyWords",
                     method, paramListObject);
         }
-
-
-
-        /*KeyWords keyWords = new KeyWords();
-        keyWords.openBrowser(testCaseBrowser);
-        keyWords.openUrl(Constants.loginAdminPage);
-        keyWords.enter_Text("id","user_login" , "cposada");
-        keyWords.enter_Text("id","user_pass" , "cposada");
-        keyWords.clickOnButton("id", "wp-submit");
-        keyWords.closeBrowser();*/
     }
 
-    private static void runReflectionMethod(String className, String methodName, Object... inputArgs) {
-        Class<?> params[] = new Class[inputArgs.length];
 
-        for (int i = 0; i < inputArgs.length; i++) {
-            if (inputArgs[i] instanceof String) {
-                params[i] = String.class;
-            }else if (inputArgs[i] instanceof Integer) {
-                params[i] = Integer.class;
-            }else if (inputArgs[i] instanceof Double) {
-                params[i] = Double.class;
-            }
-        }
-
-        try {
-            Class<?> cls = Class.forName(className);
-            Object _instance = cls.newInstance();
-            Method myMethod = cls.getDeclaredMethod(methodName, params);
-            myMethod.invoke(_instance, inputArgs);
-
-        } catch (ClassNotFoundException e) {
-            System.err.format(className + ":- Class not found%n");
-        } catch (IllegalArgumentException e) {
-            System.err
-                    .format("Method invoked with wrong number of arguments%n");
-        } catch (NoSuchMethodException e) {
-            System.err.format("In Class " + className + "::" + methodName
-                    + ":- method does not exists%n");
-        } catch (InvocationTargetException e) {
-            System.err.format("Exception thrown by an invoked method%n");
-        } catch (IllegalAccessException e) {
-            System.err
-                    .format("Can not access a member of class with modifiers private%n");
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            System.err
-                    .format("Object cannot be instantiated for the specified class using the newInstance method%n");
-        }
-
-    }
 
     private static void logTestCases(ArrayList<String> testCases) {
         logger.info("****** TEST CASES *******");
