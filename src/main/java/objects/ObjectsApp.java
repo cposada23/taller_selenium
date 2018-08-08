@@ -15,7 +15,7 @@ public class ObjectsApp {
 
     private static Logger logger = LogManager.getLogger(ObjectsApp.class.getName());
     private static final String EXIT = "Q";
-    private static String browser = "CHROME";
+    private static String browser = "FIREFOX";
 
     public static void main(String[] args) {
         logger.info("*********************************************************");

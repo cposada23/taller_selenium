@@ -16,17 +16,28 @@ public class KeyWords {
     private static WebDriverWait wait;
     private static Logger logger = LogManager.getLogger(KeyWords.class.getName());
 
-    public void openBrowser(String browserName) {
-        driver = DriverFactory.getDriver(browserName, true, true);
+    public boolean openBrowser(String browserName) {
+        try {
+            driver = DriverFactory.getDriver(browserName, true, true);
+            return true;
+        }catch (Exception e) {
+            logger.info("Not able to open browser " + e.getMessage());
+            return false;
+        }
     }
 
     public void openUrl(String url){
-        driver.navigate().to(url);
+        logger.info("Opening URL: " + url);
+        try {
+            driver.navigate().to(url);
+        }catch (Exception e) {
+            logger.error("Not able to open URL" + e.getMessage());
+        }
     }
 
-    public By locatorValue(String locatorTpye, String value) {
+    public By locatorValue(String locatorType, String value) {
         By by;
-        switch (locatorTpye) {
+        switch (locatorType) {
             case "id":
                 by = By.id(value);
                 break;

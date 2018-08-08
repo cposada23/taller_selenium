@@ -8,7 +8,14 @@ import java.lang.reflect.Method;
 
 public class ReflectionRunner {
     private static Logger logger = LogManager.getLogger(ReflectionRunner.class.getName());
-    public static void runReflectionMethod(String className, String methodName, Object... inputArgs) {
+
+    /**
+     *
+     * @param className
+     * @param methodName
+     * @param inputArgs
+     */
+    public static Object runReflectionMethod(String className, String methodName, Object... inputArgs) {
         logger.info("Running Reflection");
         Class<?> params[] = new Class[inputArgs.length];
 
@@ -26,8 +33,7 @@ public class ReflectionRunner {
             Class<?> cls = Class.forName(className);
             Object _instance = cls.newInstance();
             Method myMethod = cls.getDeclaredMethod(methodName, params);
-            myMethod.invoke(_instance, inputArgs);
-
+            return myMethod.invoke(_instance, inputArgs);
         } catch (ClassNotFoundException e) {
             System.err.format(className + ":- Class not found%n");
         } catch (IllegalArgumentException e) {
@@ -43,9 +49,9 @@ public class ReflectionRunner {
                     .format("Can not access a member of class with modifiers private%n");
             e.printStackTrace();
         } catch (InstantiationException e) {
-            System.err
-                    .format("Object cannot be instantiated for the specified class using the newInstance method%n");
+            System.err.format("Object cannot be instantiated for the specified class using the newInstance method%n");
         }
+        return false;
 
     }
 }

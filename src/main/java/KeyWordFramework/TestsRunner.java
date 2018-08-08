@@ -60,13 +60,20 @@ public class TestsRunner {
                     logger.debug("added parameter: " + data.toString());
                     myParamList.add(data);
                 }
-
             }
             Object[] paramListObject;
             paramListObject = new Object[myParamList.size()];
             paramListObject = myParamList.toArray(paramListObject);
-            ReflectionRunner.runReflectionMethod("KeyWordFramework.configuration.KeyWords",
+            Object result = ReflectionRunner.runReflectionMethod("KeyWordFramework.configuration.KeyWords",
                     method, paramListObject);
+            if(result instanceof Boolean){
+                System.out.println("booleannn");
+                if((Boolean)result) {
+                    System.out.println("exitoso");
+                }else {
+                    System.out.println("fail");
+                }
+            }
         }
     }
 
